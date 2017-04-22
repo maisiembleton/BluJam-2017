@@ -1,20 +1,21 @@
 package core;
 
+import game.TestLevel;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
-
-import java.util.HashMap;
 
 public class Game extends PApplet {
 
     private Level currentLevel;
 
     public void keyPressed() {
+        Debug.print(keyCode);
         InputHandler.keyDown.put(keyCode, true);
     }
 
     public void keyReleased() {
+        Debug.print(keyCode);
         InputHandler.keyDown.put(keyCode, false);
     }
 
@@ -31,27 +32,39 @@ public class Game extends PApplet {
         Asset testAsset = new Asset("test", testGraphic);
         AssetHandler.assets.put(testAsset.name, testAsset);
 
-        currentLevel = new Level();
+        PGraphics t =  createGraphics(40, 10);
+        t.beginDraw();
+        t.fill(255, 0, 0);
+        t.rect(0,0,40, 10);
+        t.endDraw();
+        Asset ta = new Asset("platform.jpg", t);
+        AssetHandler.assets.put(ta.name, ta);
+
+
+        currentLevel = new TestLevel();
     }
 
     float x = 0;
     float delta = 1;
     PImage img;
-    public void draw() {
-        img = AssetHandler.assets.get("test").image;
-        background(255);
-        image(img, x+=delta, x+=delta);
-        if (x +32 > width || x +32 > height) {
-            delta = -1;
-        } else if (x < 0) {
-            delta = 1;
-        }
 
+    boolean paused = false;
+    long pastNano = System.nanoTime();
+    public void draw() {
+        long elapsedNano = System.nanoTime() - pastNano;
+
+        if (!paused) {
+            currentLevel.update(elapsedNano / (float)1000000);
+            pastNano = System.nanoTime();
+            render(currentLevel);
+        }
 
     }
 
     public void render(Level level) {
-
+        for (GameObject obj : level.gameObjects) {
+            image(obj.getAsset().image, obj.getPosition().x, obj.getPosition().y);
+        }
     }
 
     public void run() {

@@ -8,5 +8,7 @@ import java.util.HashMap;
 public class InputHandler {
     public final static HashMap<Integer, Boolean> keyDown = new HashMap<>();
 
-
+    public static boolean isKeyDown(Integer keyCode) {
+        return (keyDown.containsKey(keyCode)) ? keyDown.get(keyCode) : false;
+    }
 }

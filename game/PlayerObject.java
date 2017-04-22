@@ -3,6 +3,7 @@ package game;
 import core.Asset;
 import core.AssetHandler;
 import core.GameObject;
+import core.InputHandler;
 import core.components.Collidable;
 import core.components.ColliderComponent;
 import core.components.Physicable;
@@ -15,13 +16,13 @@ import javax.swing.*;
  */
 public class PlayerObject extends GameObject implements Collidable, Physicable{
 
-    public Asset loadAsset() {
-        return AssetHandler.assets.get("player.png");
-    }
-
     private ColliderComponent collider;
     private PhysicsComponent physics;
+    private Asset asset;
 
+    public Asset getAsset() {
+        return asset;
+    }
     @Override
     public PhysicsComponent getPhysics() {
         return physics;
@@ -31,18 +32,31 @@ public class PlayerObject extends GameObject implements Collidable, Physicable{
         return collider;
     }
 
-
     public PlayerObject() {
-
+        asset = AssetHandler.getAsset("test");
+        collider = new ColliderComponent(this);
+        physics = new PhysicsComponent(this);
     }
 
     private void handleInput() {
-
+        if (InputHandler.isKeyDown(65)) {
+            position.x--;
+        }
+        if (InputHandler.isKeyDown(68)) {
+            position.x++;
+        }
+        if (InputHandler.isKeyDown(87)) {
+            position.y--;
+        }
+        if (InputHandler.isKeyDown(83)) {
+            position.y++;
+        }
     }
 
     @Override
     public void update(float dt) {
         asset.toString();
         position.toString();
+        handleInput();
     }
 }

@@ -15,6 +15,12 @@ public class ColliderComponent {
 
     public <T extends GameObject & Collidable> ColliderComponent(T obj) {
         this.obj = obj;
+        this.collisionBox = new Rectangle(0, 0, 32, 32);
+    }
+
+    public <T extends GameObject & Collidable> ColliderComponent(T obj, float width, float height) {
+        this.obj = obj;
+        this.collisionBox = new Rectangle(width, height);
     }
 
     public boolean hasCollided() {
@@ -48,6 +54,13 @@ public class ColliderComponent {
         }
 
         private Rectangle(float width, float height) {
+            this.width = width;
+            this.height = height;
+        }
+
+        private Rectangle(float dx, float dy, float width, float height) {
+            this.dx = dx;
+            this.dy = dy;
             this.width = width;
             this.height = height;
         }

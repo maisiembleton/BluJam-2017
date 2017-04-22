@@ -3,15 +3,17 @@ package core;
 import core.components.Collidable;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by zva on 22/04/17.
  */
 public class Level {
-    private Collection<GameObject> gameObjects;
-    private List<Collidable> collidables;
+    protected Collection<GameObject> gameObjects = new ArrayList<>();
+    protected List<Collidable> collidables = new ArrayList<>();
 
     public Level() {
 
@@ -24,7 +26,7 @@ public class Level {
         }
     }
 
-    public void findCollisions() {
+    private void findCollisions() {
         for (int i = 0; i < collidables.size(); i++) {
 
             Collidable obj = collidables.get(i);
@@ -32,7 +34,7 @@ public class Level {
             for (int j = i+1; j < collidables.size(); j++) {
                 Collidable objToCheck = collidables.get(j);
                 if (obj.getCollider().collidesWith(objToCheck)) {
-
+                    Debug.print("Found collision");
                 }
             }
         }

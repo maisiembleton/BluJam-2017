@@ -14,8 +14,8 @@ public class Asset {
         this.image = image;
     }
 
-    public static Asset loadAsset(/*Args*/) {
-        // Load and return an asset.
-        return null;
+    public static Asset loadAsset(String assetName, Game game) {
+        PImage img = game.loadImage(assetName);
+        return new Asset(assetName, img);
     }
 }
