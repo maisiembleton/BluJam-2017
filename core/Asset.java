@@ -13,4 +13,9 @@ public class Asset {
         this.name = name;
         this.image = image;
     }
+
+    public static Asset loadAsset(/*Args*/) {
+        // Load and return an asset.
+        return null;
+    }
 }

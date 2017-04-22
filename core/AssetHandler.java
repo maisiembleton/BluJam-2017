@@ -13,7 +13,12 @@ public class AssetHandler {
     public static final HashMap<String, Asset> assets = loadAssets(asset_directory);
 
     private static HashMap<String, Asset> loadAssets(String folder_directory) {
-
+        // data/assets/asset1.png
+        // data/assets/asset2.png ... asset3.jpg
+        //File f = new File(asset1.png)
+        // Asset = loadAsset(asset1.png);
+        //assets.put("asset1", asset)
+        //assets.get("asset1")
         return new HashMap<>();
     }
 

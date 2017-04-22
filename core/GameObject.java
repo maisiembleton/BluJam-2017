@@ -16,9 +16,9 @@ public abstract class GameObject {
     public PVector getPosition() {
         return position;
     }
-
     public Asset getAsset() {
         return asset;
     }
+
     public abstract void update(float dt);
 }

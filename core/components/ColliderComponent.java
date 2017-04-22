@@ -21,8 +21,8 @@ public class ColliderComponent {
         return collidedWith != null;
     }
 
-    public void findCollisions(Collection<Collidable> obj) {
-
+    public boolean collidesWith(Collidable otherObj) {
+        return this.collisionBox.overlaps(otherObj.getCollider().collisionBox);
     }
 
     private class Rectangle {
@@ -31,9 +31,32 @@ public class ColliderComponent {
         private float width;
         private float height;
 
+        private float getAbsX() {
+            return obj.getPosition().x + dx;
+        }
+
+        private float getAbsY() {
+            return obj.getPosition().y + dy;
+        }
+
+        private float getAbsX2() {
+            return getAbsX()+width;
+        }
+
+        private float getAbsY2() {
+            return getAbsY()+height;
+        }
+
         private Rectangle(float width, float height) {
             this.width = width;
             this.height = height;
+        }
+
+        private boolean overlaps(Rectangle otherRectangle) {
+            return this.getAbsX() < otherRectangle.getAbsX2() &&
+                    this.getAbsX2() > otherRectangle.getAbsX() &&
+                    this.getAbsY() > otherRectangle.getAbsY2() &&
+                    this.getAbsY2() < otherRectangle.getAbsY();
         }
     }
 }

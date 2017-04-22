@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Game extends PApplet {
 
-    float x = 0;
+    private Level currentLevel;
 
     public void keyPressed() {
         InputHandler.keyDown.put(keyCode, true);
@@ -30,12 +30,15 @@ public class Game extends PApplet {
         testGraphic.endDraw();
         Asset testAsset = new Asset("test", testGraphic);
         AssetHandler.assets.put(testAsset.name, testAsset);
-        img = AssetHandler.assets.get("test").image;
+
+        currentLevel = new Level();
     }
 
+    float x = 0;
     float delta = 1;
     PImage img;
     public void draw() {
+        img = AssetHandler.assets.get("test").image;
         background(255);
         image(img, x+=delta, x+=delta);
         if (x +32 > width || x +32 > height) {
@@ -43,6 +46,7 @@ public class Game extends PApplet {
         } else if (x < 0) {
             delta = 1;
         }
+
 
     }
 
