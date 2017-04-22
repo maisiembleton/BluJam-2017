@@ -10,7 +10,7 @@ public class TestLevel extends Level {
     private PlayerObject player = new PlayerObject();
 
     public TestLevel() {
-        gameObjects.add(new PlayerObject());
-        gameObjects.add(new PlatformObject(5, 5));
+        addGameObject(new PlayerObject());
+        addGameObject(new PlatformObject(5, 5));
     }
 }

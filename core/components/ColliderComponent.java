@@ -1,5 +1,6 @@
 package core.components;
 
+import core.Debug;
 import core.GameObject;
 
 import java.util.Collection;
@@ -68,8 +69,8 @@ public class ColliderComponent {
         private boolean overlaps(Rectangle otherRectangle) {
             return this.getAbsX() < otherRectangle.getAbsX2() &&
                     this.getAbsX2() > otherRectangle.getAbsX() &&
-                    this.getAbsY() > otherRectangle.getAbsY2() &&
-                    this.getAbsY2() < otherRectangle.getAbsY();
+                    this.getAbsY() < otherRectangle.getAbsY2() &&
+                    this.getAbsY2() > otherRectangle.getAbsY();
         }
     }
 }

@@ -62,7 +62,7 @@ public class Game extends PApplet {
     }
 
     public void render(Level level) {
-        for (GameObject obj : level.gameObjects) {
+        for (GameObject obj : level.getGameObjects()) {
             image(obj.getAsset().image, obj.getPosition().x, obj.getPosition().y);
         }
     }

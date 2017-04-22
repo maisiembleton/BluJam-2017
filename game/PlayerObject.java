@@ -8,6 +8,7 @@ import core.components.Collidable;
 import core.components.ColliderComponent;
 import core.components.Physicable;
 import core.components.PhysicsComponent;
+import processing.core.PVector;
 
 import javax.swing.*;
 
@@ -43,7 +44,8 @@ public class PlayerObject extends GameObject implements Collidable, Physicable{
             position.x--;
         }
         if (InputHandler.isKeyDown(68)) {
-            position.x++;
+            PVector force = new PVector(1, 0);
+            physics.addForce(force);
         }
         if (InputHandler.isKeyDown(87)) {
             position.y--;
@@ -58,5 +60,6 @@ public class PlayerObject extends GameObject implements Collidable, Physicable{
         asset.toString();
         position.toString();
         handleInput();
+        physics.update(dt);
     }
 }

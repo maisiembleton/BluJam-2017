@@ -12,11 +12,22 @@ import java.util.concurrent.ArrayBlockingQueue;
  * Created by zva on 22/04/17.
  */
 public class Level {
-    protected Collection<GameObject> gameObjects = new ArrayList<>();
-    protected List<Collidable> collidables = new ArrayList<>();
+    private Collection<GameObject> gameObjects = new ArrayList<>();
+    private List<Collidable> collidables = new ArrayList<>();
+
+    Collection<GameObject> getGameObjects() {
+        return gameObjects;
+    }
 
     public Level() {
 
+    }
+
+    public void addGameObject(GameObject obj) {
+        gameObjects.add(obj);
+        if (obj instanceof Collidable) {
+            collidables.add((Collidable)obj);
+        }
     }
 
     void update(float dt) {
